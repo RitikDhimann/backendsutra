@@ -4,7 +4,7 @@ import Product from "../models/ProductScheema.js";
 // ✅ Create new category
 export const createCategory = async (req, res) => {
   try {
-    const { name, products } = req.body;
+    const { name, products, parent, type } = req.body;
 
     // 🧩 Validate category name
     if (!name)
@@ -38,6 +38,8 @@ export const createCategory = async (req, res) => {
     const category = new Category({
       name,
       products: validProducts,
+      parent: parent || null,
+      type: type || "product",
     });
 
     await category.save();
@@ -69,7 +71,10 @@ export const createCategory = async (req, res) => {
 // ✅ Get all categories with products populated
 export const getAllCategories = async (req, res) => {
   try {
-    const categories = await Category.find().populate("products").lean();
+    const categories = await Category.find()
+      .populate("products")
+      .populate("parent", "name")
+      .lean();
     res.status(200).json({ success: true, total: categories.length, categories });
   } catch (err) {
     console.error("Error fetching categories:", err);
@@ -93,7 +98,7 @@ export const getCategoryById = async (req, res) => {
 // ✅ Update category (name or products)
 export const updateCategory = async (req, res) => {
   try {
-    const { name, products } = req.body;
+    const { name, products, parent, type } = req.body;
     const category = await Category.findById(req.params.id);
 
     if (!category) return res.status(404).json({ success: false, message: "Category not found" });
@@ -103,6 +108,8 @@ export const updateCategory = async (req, res) => {
 
     if (name) category.name = name;
     if (products) category.products = products;
+    if (parent !== undefined) category.parent = parent || null;
+    if (type) category.type = type;
 
     await category.save();
 

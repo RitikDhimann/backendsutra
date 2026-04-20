@@ -14,6 +14,16 @@ const categorySchema = new mongoose.Schema(
         ref: "Product",
       },
     ],
+    parent: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Category",
+      default: null,
+    },
+    type: {
+      type: String,
+      enum: ["occasion", "product"],
+      default: "product",
+    },
   },
   { timestamps: true }
 );
