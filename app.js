@@ -5,10 +5,13 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import productRoutes from "./routes/productRoutes.js";
-import userRotes from './routes/userRoutes.js';
+import userRoutes from './routes/userRoutes.js';
 import orderRoutes from './routes/orderRoutes.js'
 import categoryRoutes from './routes/categoryRoutes.js'
 import couponRoutes from './routes/couponRoutes.js'
+import reviewRoutes from './routes/reviewRoutes.js'
+import queryRoutes from './routes/queryRoutes.js'
+
 import { initScheduler } from "./utils/scheduler.js";
 
 // Verify Environment Variables
@@ -28,10 +31,13 @@ app.use("/uploads", express.static("uploads"));
 
 // Routes
 app.use("/api/products", productRoutes);
-app.use('/api/user', userRotes)
+app.use('/api/user', userRoutes)
 app.use('/api/order', orderRoutes);
 app.use('/api/category', categoryRoutes);
 app.use('/api/coupon', couponRoutes);
+app.use('/api/reviews', reviewRoutes);
+app.use('/api/queries', queryRoutes);
+
 
 // DB Connection
 

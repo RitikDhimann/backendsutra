@@ -17,6 +17,8 @@ const storage = multer.diskStorage({
     } else if (file.fieldname.startsWith("variant-")) {
       const variantKey = file.fieldname.split("variant-")[1];
       uploadPath = `uploads/variants/${variantKey}`;
+    } else if (file.fieldname === "image") {
+      uploadPath = "uploads/reviews";
     }
 
     ensureDir(uploadPath);

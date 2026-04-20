@@ -1,6 +1,7 @@
 import Order from "../models/orderSchemma.js";
 import Product from "../models/ProductScheema.js";
 import User from "../models/user.js";
+import Query from "../models/Query.js";
 import sendEmail from "../utils/sendEmail.js";
 import { sendWhatsAppMessage } from "../utils/whatsappService.js";
 
@@ -291,3 +292,25 @@ export const getDashboardStats = async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 };
+
+// Get Notification Stats (New Orders & Queries)
+export const getNotificationStats = async (req, res) => {
+  try {
+    const newQueries = await Query.countDocuments({ status: "new" });
+    const processingOrders = await Order.countDocuments({ orderStatus: "processing" });
+    const unpaidOrders = await Order.countDocuments({ 
+      paymentStatus: "pending", 
+      paymentMethod: { $ne: "COD" } 
+    });
+
+    res.status(200).json({
+      newQueries,
+      processingOrders,
+      unpaidOrders,
+      total: newQueries + processingOrders + unpaidOrders
+    });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
