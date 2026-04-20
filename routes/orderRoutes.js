@@ -17,6 +17,7 @@ const router = express.Router();
 // Routes
 router.post("/", createOrder); // Create new order
 router.get("/", getOrders); // Get all orders (admin)
+router.get("/stats", getDashboardStats); // Get dashboard statistics
 router.get("/notifications", getNotificationStats); // Get notification counts
 router.get("/user/:userId", getUserOrders); // Get orders of a single user
 router.get("/:id", getOrderById); // Get order by ID
