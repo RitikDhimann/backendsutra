@@ -11,6 +11,7 @@ import categoryRoutes from './routes/categoryRoutes.js'
 import couponRoutes from './routes/couponRoutes.js'
 import reviewRoutes from './routes/reviewRoutes.js'
 import queryRoutes from './routes/queryRoutes.js'
+import bannerRoutes from './routes/bannerRoutes.js'
 
 import { initScheduler } from "./utils/scheduler.js";
 
@@ -37,6 +38,7 @@ app.use('/api/category', categoryRoutes);
 app.use('/api/coupon', couponRoutes);
 app.use('/api/reviews', reviewRoutes);
 app.use('/api/queries', queryRoutes);
+app.use('/api/banner', bannerRoutes);
 
 
 // DB Connection
