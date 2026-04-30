@@ -19,7 +19,7 @@ export const getProducts = async (req, res) => {
     const tags = req.query.tags ? (Array.isArray(req.query.tags) ? req.query.tags : [req.query.tags]) : [];
 
     // Build filter query
-    const filter = {};
+    const filter = { published: true };
 
     if (search) {
       filter.title = { $regex: search, $options: 'i' };
