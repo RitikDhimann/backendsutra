@@ -1,3 +1,4 @@
+import path from "path";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -27,8 +28,7 @@ initScheduler();
 
 app.use(cors());
 app.use(express.json());
-app.use("/uploads", express.static("src/uploads"));
-app.use("/uploads", express.static("uploads"));
+app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
 
 // Routes
 app.use("/api/products", productRoutes);

@@ -10,15 +10,15 @@ const ensureDir = (dirPath) => {
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    let uploadPath = "uploads/general";
+    let uploadPath = path.join(process.cwd(), "uploads", "general");
 
     if (file.fieldname === "general") {
-      uploadPath = "uploads/general";
+      uploadPath = path.join(process.cwd(), "uploads", "general");
     } else if (file.fieldname.startsWith("variant-")) {
       const variantKey = file.fieldname.split("variant-")[1];
-      uploadPath = `uploads/variants/${variantKey}`;
+      uploadPath = path.join(process.cwd(), "uploads", "variants", variantKey);
     } else if (file.fieldname === "image") {
-      uploadPath = "uploads/reviews";
+      uploadPath = path.join(process.cwd(), "uploads", "reviews");
     }
 
     ensureDir(uploadPath);

@@ -23,7 +23,7 @@ export const createReview = async (req, res) => {
     // Handle image upload path
     let imageUrl = image;
     if (req.file) {
-      imageUrl = `/${req.file.path.replace(/\\/g, '/')}`; // Ensure proper path formatting
+      imageUrl = `/uploads/reviews/${req.file.filename}`;
     }
 
     const newReview = new Review({
@@ -47,9 +47,10 @@ export const createReview = async (req, res) => {
 export const updateReview = async (req, res) => {
   try {
     const { id } = req.params;
+
     const updateData = { ...req.body };
     if (req.file) {
-      updateData.image = `/${req.file.path.replace(/\\/g, '/')}`;
+      updateData.image = `/uploads/reviews/${req.file.filename}`;
     }
 
     const updatedReview = await Review.findByIdAndUpdate(id, updateData, {
