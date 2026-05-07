@@ -27,7 +27,7 @@ export const createBanner = async (req, res) => {
     let imagePath = "";
 
     if (req.file) {
-      imagePath = req.file.path.replace(/\\/g, "/");
+      imagePath = `/uploads/banners/${req.file.filename}`;
     }
 
     // If this one is set to active, deactivate others
@@ -61,7 +61,7 @@ export const updateBanner = async (req, res) => {
 
     let imagePath = banner.image;
     if (req.file) {
-      imagePath = req.file.path.replace(/\\/g, "/");
+      imagePath = `/uploads/banners/${req.file.filename}`;
     }
 
     // If we are setting this one to active, deactivate all others

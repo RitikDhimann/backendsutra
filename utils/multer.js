@@ -17,6 +17,8 @@ const storage = multer.diskStorage({
     } else if (file.fieldname.startsWith("variant-")) {
       const variantKey = file.fieldname.split("variant-")[1];
       uploadPath = path.join(process.cwd(), "uploads", "variants", variantKey);
+    } else if (file.fieldname === "banner") {
+      uploadPath = path.join(process.cwd(), "uploads", "banners");
     } else if (file.fieldname === "image") {
       uploadPath = path.join(process.cwd(), "uploads", "reviews");
     }

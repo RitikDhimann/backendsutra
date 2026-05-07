@@ -13,8 +13,8 @@ const router = express.Router();
 
 router.get("/", getAllBanners);
 router.get("/active", getActiveBanner);
-router.post("/", upload1.single('image'), createBanner);
-router.patch("/:id", upload1.single('image'), updateBanner);
+router.post("/", upload1.single('banner'), createBanner);
+router.patch("/:id", upload1.single('banner'), updateBanner);
 router.patch("/:id/toggle", toggleBannerActive);
 router.delete("/:id", deleteBanner);
 
